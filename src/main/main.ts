@@ -1,4 +1,4 @@
-import {app, BrowserWindow} from 'electron';
+import {app, BrowserWindow, session} from 'electron';
 import path from 'path';
 
 declare const MAIN_WINDOW_VITE_DEV_SERVER_URL: string;
@@ -10,6 +10,15 @@ if (require('electron-squirrel-startup')) {
 }
 
 const createWindow = () => {
+
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,
+        'Content-Security-Policy': ['default-src \'self\'; script-src \'self\' \'unsafe-inline\'; style-src \'self\' \'unsafe-inline\'']
+      }
+    })
+  })
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
@@ -26,7 +35,6 @@ const createWindow = () => {
   } else {
     mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
   }
-
   // Open the DevTools.
   mainWindow.webContents.openDevTools({mode: 'bottom'});
 };
