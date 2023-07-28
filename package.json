@@ -9,7 +9,8 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "lint": "echo \"No linting configured\"",
+    "format": "prettier --write ./*.html ./*.ts src/"
   },
   "keywords": [],
   "author": {
@@ -29,13 +30,16 @@
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",
     "electron": "25.3.1",
+    "prettier": "^3.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   },
   "dependencies": {
     "axios": "^1.4.0",
+    "chart.js": "^4.3.1",
     "electron-squirrel-startup": "^1.0.0",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^6.0.5"
   }
