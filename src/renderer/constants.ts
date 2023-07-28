@@ -19,3 +19,5 @@ export const colors = {
   fontColor,
   accent,
 };
+
+export const uiFontSize = "1.2rem";

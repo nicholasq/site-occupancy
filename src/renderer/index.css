@@ -12,6 +12,21 @@
   font-weight: normal;
 }
 
+:root {
+  --yellow: rgb(252, 238, 10);
+  --red: rgb(219, 13, 21);
+  --blue: rgb(0, 240, 255);
+  --transYellow: rgba(252, 238, 10, 0.5);
+  --transRed: rgba(219, 13, 21, 0.5);
+  --transBlue: rgb(0, 240, 255, 0.5);
+  --fontColor: white;
+  --darkGray: rgb(85, 85, 85);
+  --accent: rgb(229, 12, 105);
+  --fontSizeUI: 1.2rem;
+  --backgroundYellow: rgb(252, 238, 10);
+  --borderYellow: 1px solid yellow;
+}
+
 html {
   background-color: black;
   color: white;

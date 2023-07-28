@@ -32,16 +32,18 @@ export const options: ChartOptions<"line"> = {
         color: colors.fontColor,
         font: {
           weight: "bold",
+          family: "Victor Mono",
           size: 16,
         },
       },
     },
     title: {
       display: true,
-      text: "Device Count Per Building",
+      text: "Device Count Per Building - 7/27/2023 - 7/27/2023",
       color: colors.fontColor,
       font: {
         weight: "bold",
+        family: "Victor Mono",
         size: 20,
       },
     },
@@ -52,6 +54,7 @@ export const options: ChartOptions<"line"> = {
         color: colors.fontColor,
         font: {
           weight: "bold",
+          family: "Victor Mono",
         },
       },
       grid: {
@@ -66,6 +69,7 @@ export const options: ChartOptions<"line"> = {
         color: colors.fontColor,
         font: {
           weight: "bold",
+          family: "Victor Mono",
         },
       },
     },

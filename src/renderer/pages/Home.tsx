@@ -8,29 +8,26 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 100%;
 `;
 
 const Main = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-top: 1rem;
-  padding: 1rem 1rem;
+  padding: 0.5rem 0.5rem;
 `;
 
 const ChartContainer = styled.div`
   display: flex;
   justify-content: center;
   border: 0.4em solid ${colors.red};
-  height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
+  padding: 0.5rem;
 `;
 const ChartNavContainer = styled.div`
   margin-top: 1rem;
-  padding: 0;
   height: 100%;
-  border: 1px solid yellow;
+  border: var(--borderYellow);
   display: flex;
   justify-content: center;
   align-self: center;
@@ -46,7 +43,7 @@ const ChartNavButton = styled.button`
   color: white;
 
   &:hover {
-    background-color: yellow;
+    background-color: var(--backgroundYellow);
     color: black;
     cursor: pointer;
   }
