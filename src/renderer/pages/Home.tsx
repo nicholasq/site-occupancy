@@ -1,7 +1,9 @@
 import MenuBar from "../components/MenuBar";
 import Chart from "../components/Chart";
+import { chartOptions } from "../components/Chart";
 import { styled } from "styled-components";
-import { data } from "../fakedata";
+import { data as fakeData } from "../fakedata";
+import { useMemo, useState } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -48,17 +50,43 @@ const ChartNavButton = styled.button`
   }
 `;
 
+function fetchChartData() {
+  return fakeData();
+}
+
 export default function Home() {
+  const [page, setPage] = useState(0);
+  const options = useMemo(
+    () => chartOptions("Device Count Per Building - 7/27/2023 - 7/27/2023"),
+    [page],
+  );
+  const data = useMemo(() => fetchChartData(), [page]);
+
+  function handlePreviousPage() {
+    if (page === 0) {
+      return;
+    }
+    setPage(page - 1);
+  }
+  function handleNextPage() {
+    // todo: get max page from data
+    if (page === 3) {
+      return;
+    }
+    setPage(page + 1);
+  }
+
   return (
     <Container>
       <MenuBar></MenuBar>
       <Main>
         <ChartContainer>
-          <Chart data={data}></Chart>
+          <Chart data={data} options={options}></Chart>
         </ChartContainer>
         <ChartNavContainer>
-          <ChartNavButton>Previous</ChartNavButton>
-          <ChartNavButton>Next</ChartNavButton>
+          <ChartNavButton onClick={handlePreviousPage}>Previous</ChartNavButton>
+          <ChartNavButton>{page + 1} of 4</ChartNavButton>
+          <ChartNavButton onClick={handleNextPage}>Next</ChartNavButton>
         </ChartNavContainer>
       </Main>
     </Container>

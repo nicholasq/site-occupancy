@@ -33,13 +33,20 @@ const Dropdown = styled.div`
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   font-size: var(--fontSizeUI);
   z-index: 1;
+  max-height: 75vh;
+  overflow-y: auto;
+  width: max-content;
+  border-top: 16px solid var(--yellow);
 `;
 const Item = styled.p`
-  padding: 0 2rem;
+  padding: 1rem 2rem;
   color: white;
+  margin: 0;
 
   &:hover {
     cursor: pointer;
+    background-color: var(--yellow);
+    color: black;
   }
 `;
 

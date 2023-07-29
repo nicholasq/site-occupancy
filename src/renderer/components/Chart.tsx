@@ -23,59 +23,67 @@ ChartJS.register(
   Legend,
 );
 
-export const options: ChartOptions<"line"> = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top" as const,
-      labels: {
+export function chartOptions(titleText: string): ChartOptions<"line"> {
+  return {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top" as const,
+        labels: {
+          color: theme.colors.fontColor,
+          font: {
+            weight: "bold",
+            family: "Victor Mono",
+            size: 16,
+          },
+        },
+      },
+      title: {
+        display: true,
+        text: titleText,
         color: theme.colors.fontColor,
         font: {
           weight: "bold",
           family: "Victor Mono",
-          size: 16,
+          size: 20,
         },
       },
     },
-    title: {
-      display: true,
-      text: "Device Count Per Building - 7/27/2023 - 7/27/2023",
-      color: theme.colors.fontColor,
-      font: {
-        weight: "bold",
-        family: "Victor Mono",
-        size: 20,
-      },
-    },
-  },
-  scales: {
-    x: {
-      ticks: {
-        color: theme.colors.fontColor,
-        font: {
-          weight: "bold",
-          family: "Victor Mono",
+    scales: {
+      x: {
+        ticks: {
+          color: theme.colors.fontColor,
+          font: {
+            weight: "bold",
+            family: "Victor Mono",
+          },
+        },
+        grid: {
+          color: theme.colors.accent,
         },
       },
-      grid: {
-        color: theme.colors.accent,
-      },
-    },
-    y: {
-      grid: {
-        color: theme.colors.accent,
-      },
-      ticks: {
-        color: theme.colors.fontColor,
-        font: {
-          weight: "bold",
-          family: "Victor Mono",
+      y: {
+        grid: {
+          color: theme.colors.accent,
+        },
+        ticks: {
+          color: theme.colors.fontColor,
+          font: {
+            weight: "bold",
+            family: "Victor Mono",
+          },
         },
       },
     },
-  },
-};
+  };
+}
 
-export default function Chart({ data }: { data: ChartData<"line"> }) {
+export default function Chart({
+  data,
+  options,
+}: {
+  data: ChartData<"line">;
+  options: ChartOptions<"line">;
+}) {
   return <Line options={options} data={data} />;
 }
