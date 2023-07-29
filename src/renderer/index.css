@@ -19,17 +19,20 @@
   --transYellow: rgba(252, 238, 10, 0.5);
   --transRed: rgba(219, 13, 21, 0.5);
   --transBlue: rgb(0, 240, 255, 0.5);
-  --fontColor: white;
+  --textColor: white;
   --darkGray: rgb(85, 85, 85);
   --accent: rgb(229, 12, 105);
   --fontSizeUI: 1.2rem;
-  --backgroundYellow: rgb(252, 238, 10);
-  --borderYellow: 1px solid yellow;
+  --borderYellow: 1px solid var(--yellow);
+  --borderRed: 1px solid var(--red);
+  --borderBlue: 1px solid var(--blue);
+  --borderAccent: 1px solid var(--accent);
+  --backgroundColor: black;
 }
 
 html {
-  background-color: black;
-  color: white;
+  background-color: var(--backgroundColor);
+  color: var(--textColor);
 }
 
 body {

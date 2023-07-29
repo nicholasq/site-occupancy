@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { uiFontSize } from "../constants";
+import { theme } from "../constants";
 
 const BlinkSection = styled.div`
   display: flex;
@@ -7,7 +7,7 @@ const BlinkSection = styled.div`
   align-items: center;
   margin-left: 1rem;
   padding: 1rem 2rem;
-  font-size: ${uiFontSize};
+  font-size: ${theme.font.size};
   flex: var(--flex, 0 1 auto);
 `;
 

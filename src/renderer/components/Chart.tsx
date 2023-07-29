@@ -11,7 +11,7 @@ import {
   Tooltip,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { colors } from "../constants";
+import { theme } from "../constants";
 
 ChartJS.register(
   CategoryScale,
@@ -29,7 +29,7 @@ export const options: ChartOptions<"line"> = {
     legend: {
       position: "top" as const,
       labels: {
-        color: colors.fontColor,
+        color: theme.colors.fontColor,
         font: {
           weight: "bold",
           family: "Victor Mono",
@@ -40,7 +40,7 @@ export const options: ChartOptions<"line"> = {
     title: {
       display: true,
       text: "Device Count Per Building - 7/27/2023 - 7/27/2023",
-      color: colors.fontColor,
+      color: theme.colors.fontColor,
       font: {
         weight: "bold",
         family: "Victor Mono",
@@ -51,22 +51,22 @@ export const options: ChartOptions<"line"> = {
   scales: {
     x: {
       ticks: {
-        color: colors.fontColor,
+        color: theme.colors.fontColor,
         font: {
           weight: "bold",
           family: "Victor Mono",
         },
       },
       grid: {
-        color: colors.accent,
+        color: theme.colors.accent,
       },
     },
     y: {
       grid: {
-        color: colors.accent,
+        color: theme.colors.accent,
       },
       ticks: {
-        color: colors.fontColor,
+        color: theme.colors.fontColor,
         font: {
           weight: "bold",
           family: "Victor Mono",

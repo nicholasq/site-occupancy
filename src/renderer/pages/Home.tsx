@@ -1,7 +1,6 @@
 import MenuBar from "../components/MenuBar";
 import Chart from "../components/Chart";
 import { styled } from "styled-components";
-import { colors } from "../constants";
 import { data } from "../fakedata";
 
 const Container = styled.div`
@@ -20,7 +19,7 @@ const Main = styled.main`
 const ChartContainer = styled.div`
   display: flex;
   justify-content: center;
-  border: 0.4em solid ${colors.red};
+  border: 0.4em solid var(--red);
   background-color: rgba(0, 0, 0, 0.6);
   padding: 0.5rem;
 `;
@@ -43,7 +42,7 @@ const ChartNavButton = styled.button`
   color: white;
 
   &:hover {
-    background-color: var(--backgroundYellow);
+    background-color: var(--yellow);
     color: black;
     cursor: pointer;
   }
