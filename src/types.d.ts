@@ -1,16 +1,21 @@
 export interface SiteOccupancyApi {
   getRecordCount(): Promise<number>;
+  getPageCount(): Promise<number>;
 
-  getRecordPage(page: number, pageSize: number): Promise<OccupancyRecord>;
+  getRecordPage(
+    page: number,
+    pageSize: number,
+  ): Promise<SiteOccupancyRecordPage>;
 
   getLocations(): Promise<LocationDetails[]>;
 }
 
-export interface OccupancyRecord {
+export interface SiteOccupancyRecordPage {
   dateRangeLabel: string;
-  wiredCount: number;
-  wirelessCount: number;
-  siteId: string;
+  siteName: string;
+  labels: string[];
+  wiredCounts: number[];
+  wirelessCounts: number[];
 }
 
 export interface LocationDetails {

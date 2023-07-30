@@ -26,3 +26,10 @@ export const theme = {
     size: "1.2rem",
   },
 };
+
+export const channels = {
+  getLocations: "getLocations",
+  getRecordCount: "getRecordCount",
+  getRecordPage: "getRecordPage",
+  getPageCount: "getPageCount",
+};

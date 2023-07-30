@@ -1,21 +1,28 @@
 // See the Electron documentation for details on how to use preload scripts:
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
 import { contextBridge, ipcRenderer } from "electron";
-import { LocationDetails, OccupancyRecord } from "../types";
-import { SiteOccupancyApi } from "../types";
+import {
+  LocationDetails,
+  SiteOccupancyRecordPage,
+  SiteOccupancyApi,
+} from "../types";
+import { channels } from "./constants";
 
 const api: SiteOccupancyApi = {
   getLocations: async (): Promise<LocationDetails[]> => {
-    return ipcRenderer.invoke("getLocations");
+    return ipcRenderer.invoke(channels.getLocations);
   },
   getRecordCount: async (): Promise<number> => {
-    return ipcRenderer.invoke("getRecordCount");
+    return ipcRenderer.invoke(channels.getRecordCount);
+  },
+  getPageCount(): Promise<number> {
+    return ipcRenderer.invoke(channels.getPageCount);
   },
   getRecordPage: async (
     page: number,
     pageSize: number,
-  ): Promise<OccupancyRecord> => {
-    return ipcRenderer.invoke("getRecordPage", page, pageSize);
+  ): Promise<SiteOccupancyRecordPage> => {
+    return ipcRenderer.invoke(channels.getRecordPage, page, pageSize);
   },
 };
 

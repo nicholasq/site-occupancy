@@ -1,6 +1,6 @@
 import { app, BrowserWindow, session } from "electron";
 import path from "path";
-import { registerIpcHandlers } from "../ipc";
+import { registerIpcHandlers } from "./ipc";
 
 declare const MAIN_WINDOW_VITE_DEV_SERVER_URL: string;
 declare const MAIN_WINDOW_VITE_NAME: string;
