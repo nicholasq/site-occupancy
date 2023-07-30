@@ -1,0 +1,12 @@
+POST https://{{host}}/api/system/v1/auth/token
+Authorization: Basic {{username}} {{password}}
+
+> {%
+  // Save the token to the global environment so that it can be used in subsequent requests
+  client.global.set("dnac_token", response.body.Token);
+%}
+
+###
+GET https://sandboxdnac.cisco.com/dna/intent/api/v1/site-health
+x-auth-token: {{dnac_token}}
+

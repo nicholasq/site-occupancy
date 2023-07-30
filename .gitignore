@@ -90,3 +90,6 @@ typings/
 
 # Electron-Forge
 out/
+
+# IDEA http client private env files
+*.private.env.json

@@ -1,9 +1,9 @@
 import { styled } from "styled-components";
 import Typewriter from "./Typewriter";
 import TextBlinker from "./TextBlinker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import type { HoverDropdownProps } from "./HoverDropdown";
 import HoverDropdown from "./HoverDropdown";
-import { locationItems } from "../fakedata";
 
 const MainDiv = styled.div`
   display: flex;
@@ -21,7 +21,9 @@ const RightDiv = styled.div`
   border: var(--borderYellow);
   justify-content: stretch;
 `;
-const MenuItem = styled.button<{ $bgHover?: string }>`
+const MenuItem = styled.button<{
+  $bgHover?: string;
+}>`
   display: flex;
   padding: 1rem 2rem;
   font-size: var(--fontSizeUI);
@@ -46,6 +48,17 @@ const StatusContainer = styled.div`
 
 export default function MenuBar() {
   const [syncing, setSyncing] = useState(false);
+  const [locationItems, setLocationItems] = useState<
+    HoverDropdownProps["items"]
+  >([]);
+
+  useEffect(() => {
+    window.electron.getLocations().then((locs) => {
+      setLocationItems(
+        locs.map((loc) => ({ label: loc.siteName, value: loc.siteId })),
+      );
+    });
+  }, []);
 
   function toggleSync() {
     setSyncing(!syncing);

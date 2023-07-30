@@ -2,7 +2,7 @@ import MenuBar from "../components/MenuBar";
 import Chart from "../components/Chart";
 import { chartOptions } from "../components/Chart";
 import { styled } from "styled-components";
-import { data as fakeData } from "../fakedata";
+import { data as fakeData } from "../../main/fakedata";
 import { useMemo, useState } from "react";
 
 const Container = styled.div`
