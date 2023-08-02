@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { ChartContext } from "../context/ChartContext";
 
 const ChartNavContainer = styled.div`
   margin-top: 1rem;
@@ -26,48 +27,17 @@ const ChartNavButton = styled.button`
   }
 `;
 
-export default function ChartNavBar({
-  page,
-  onPageChange,
-}: {
-  page: number;
-  onPageChange: (op: number) => void;
-}) {
-  const [pageSize, setPageSize] = useState(0);
-
-  useEffect(() => {
-    window.electron.getPageCount().then((count: number) => setPageSize(count));
-  }, []);
-
-  function handlePageChange(op: number) {
-    if (page === 0 && op === -1) {
-      return;
-    }
-    if (page === pageSize - 1 && op === 1) {
-      return;
-    }
-    onPageChange(page + op);
-  }
+export default function ChartNavBar() {
+  const { pageNumber, nextPage, prevPage, pageCount } =
+    useContext(ChartContext);
 
   return (
     <ChartNavContainer>
-      <ChartNavButton
-        onClick={() => {
-          handlePageChange(-1);
-        }}
-      >
-        Previous
-      </ChartNavButton>
+      <ChartNavButton onClick={prevPage}>Previous</ChartNavButton>
       <ChartNavButton>
-        {page + 1} of {pageSize}
+        {pageNumber + 1} of {pageCount}
       </ChartNavButton>
-      <ChartNavButton
-        onClick={() => {
-          handlePageChange(1);
-        }}
-      >
-        Next
-      </ChartNavButton>
+      <ChartNavButton onClick={nextPage}>Next</ChartNavButton>
     </ChartNavContainer>
   );
 }

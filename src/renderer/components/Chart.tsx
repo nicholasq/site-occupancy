@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import type { ChartData, ChartOptions } from "chart.js";
+import React, { useContext } from "react";
+import type { ChartOptions } from "chart.js";
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -12,6 +12,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { theme } from "../constants";
+import { ChartContext } from "../context/ChartContext";
 
 ChartJS.register(
   CategoryScale,
@@ -76,17 +77,14 @@ const defaultChartOptions: ChartOptions<"line"> = {
   },
 };
 
-export function chartOptions(titleText: string): ChartOptions<"line"> {
+function chartOptions(titleText: string): ChartOptions<"line"> {
   // This might be a bad idea to reuse the same object, but it's fine for now.
+  // @ts-ignore for whatever reason, ts says that title is a boolean, but it's not.
   defaultChartOptions.plugins.title.text = titleText;
   return defaultChartOptions;
 }
 
-export function chartData(
-  labels: string[],
-  wired: number[],
-  wireless: number[],
-) {
+function chartData(labels: string[], wired: number[], wireless: number[]) {
   return {
     labels,
     datasets: [
@@ -106,22 +104,19 @@ export function chartData(
   };
 }
 
-export default function Chart({ page }: { page: number }) {
-  const [title, setTitle] = useState("");
-  const [data, setData] = useState<ChartData<"line">>(null);
+export default function Chart() {
+  const { recordPage, pageNumber, locationId } = useContext(ChartContext);
 
-  useEffect(() => {
-    window.electron.getRecordPage(page, 12).then((record) => {
-      setTitle(record.dateRangeLabel);
-      setData(
-        chartData(record.labels, record.wiredCounts, record.wirelessCounts),
-      );
-    });
-  }, [page]);
-
-  if (!data) {
+  if (!recordPage) {
     return <div>Loading...</div>;
   }
+
+  const data = chartData(
+    recordPage.labels,
+    recordPage.wiredCounts,
+    recordPage.wirelessCounts,
+  );
+  const title = recordPage.dateRangeLabel;
 
   return <Line options={chartOptions(title)} data={data} />;
 }

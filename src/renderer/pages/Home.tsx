@@ -1,8 +1,8 @@
 import MenuBar from "../components/MenuBar";
 import Chart from "../components/Chart";
 import { styled } from "styled-components";
-import { useState } from "react";
 import ChartNavBar from "../components/ChartNavBar";
+import { ChartContextProvider } from "../context/ChartContext";
 
 const Container = styled.div`
   display: flex;
@@ -26,17 +26,17 @@ const ChartContainer = styled.div`
 `;
 
 export default function Home() {
-  const [page, setPage] = useState(0);
-
   return (
     <Container>
-      <MenuBar></MenuBar>
-      <Main>
-        <ChartContainer>
-          <Chart page={page} />
-        </ChartContainer>
-        <ChartNavBar page={page} onPageChange={setPage} />
-      </Main>
+      <ChartContextProvider>
+        <MenuBar />
+        <Main>
+          <ChartContainer>
+            <Chart />
+          </ChartContainer>
+          <ChartNavBar />
+        </Main>
+      </ChartContextProvider>
     </Container>
   );
 }

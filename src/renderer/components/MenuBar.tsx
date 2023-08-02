@@ -1,9 +1,10 @@
 import { styled } from "styled-components";
 import Typewriter from "./Typewriter";
 import TextBlinker from "./TextBlinker";
-import { useEffect, useState } from "react";
-import type { HoverDropdownProps } from "./HoverDropdown";
+import { useContext, useState } from "react";
 import HoverDropdown from "./HoverDropdown";
+import type { MenuItem } from "../../types";
+import { ChartContext } from "../context/ChartContext";
 
 const MainDiv = styled.div`
   display: flex;
@@ -15,11 +16,13 @@ const LeftDiv = styled.div`
   display: flex;
   justify-content: flex-end;
   flex: 1;
+  font-size: var(--fontSizeUI);
 `;
 const RightDiv = styled.div`
   display: flex;
   border: var(--borderYellow);
   justify-content: stretch;
+  font-size: var(--fontSizeUI);
 `;
 const MenuItem = styled.button<{
   $bgHover?: string;
@@ -46,29 +49,37 @@ const StatusContainer = styled.div`
   align-items: center;
 `;
 
-export default function MenuBar() {
-  const [syncing, setSyncing] = useState(false);
-  const [locationItems, setLocationItems] = useState<
-    HoverDropdownProps["items"]
-  >([]);
+export interface MenuBarProps {
+  onUpdateLocationId: (locationId: string) => void;
+}
 
-  useEffect(() => {
-    window.electron.getLocations().then((locs) => {
-      setLocationItems(
-        locs.map((loc) => ({ label: loc.siteName, value: loc.siteId })),
-      );
-    });
-  }, []);
+export default function MenuBar() {
+  const { locations, locationId, locationName, setLocationId } =
+    useContext(ChartContext);
+  const [syncing, setSyncing] = useState(false);
 
   function toggleSync() {
     setSyncing(!syncing);
   }
 
+  const locationItems =
+    locations?.map((loc) => ({
+      label: loc.siteName,
+      value: loc.siteId,
+    })) ?? [];
+
+  const shortLocationName =
+    locationName?.length > 50
+      ? locationName?.substring(0, 50) + "..."
+      : locationName;
+
   return (
     <MainDiv>
-      <LeftDiv></LeftDiv>
+      <LeftDiv>
+        <StatusContainer>{shortLocationName}</StatusContainer>
+      </LeftDiv>
       <RightDiv>
-        <HoverDropdown items={locationItems} />
+        <HoverDropdown items={locationItems} onSelect={setLocationId} />
         <MenuItem onClick={toggleSync}>Sync</MenuItem>
         <MenuItem>Settings</MenuItem>
       </RightDiv>

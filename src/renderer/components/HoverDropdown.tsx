@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import React, { useState } from "react";
+import { MenuItem } from "../../types";
 
 const RootDiv = styled.div`
   --backgroundColor: transparent;
@@ -51,11 +52,16 @@ const Item = styled.p`
 `;
 
 export interface HoverDropdownProps {
-  items: { label: string; value: string }[];
+  items: MenuItem[];
+  onSelect: (value: string) => void;
 }
 
-export default function HoverDropdown({ items }: HoverDropdownProps) {
+export default function HoverDropdown({ items, onSelect }: HoverDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
+
+  function handleSelect(event: React.MouseEvent<HTMLParagraphElement>) {
+    onSelect(event.currentTarget.dataset["value"]!);
+  }
 
   return (
     <RootDiv
@@ -66,7 +72,13 @@ export default function HoverDropdown({ items }: HoverDropdownProps) {
       {isOpen && (
         <Dropdown>
           {items.map((item) => (
-            <Item key={item.value}>{item.label}</Item>
+            <Item
+              key={item.value}
+              onClick={handleSelect}
+              data-value={item.value}
+            >
+              {item.label}
+            </Item>
           ))}
         </Dropdown>
       )}

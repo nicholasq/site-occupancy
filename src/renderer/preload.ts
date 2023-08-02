@@ -12,17 +12,17 @@ const api: SiteOccupancyApi = {
   getLocations: async (): Promise<LocationDetails[]> => {
     return ipcRenderer.invoke(channels.getLocations);
   },
-  getRecordCount: async (): Promise<number> => {
-    return ipcRenderer.invoke(channels.getRecordCount);
+  getRecordCount: async (locationId: string): Promise<number> => {
+    return ipcRenderer.invoke(channels.getRecordCount, locationId);
   },
-  getPageCount(): Promise<number> {
-    return ipcRenderer.invoke(channels.getPageCount);
+  getPageCount: async (locationId: string): Promise<number> => {
+    return ipcRenderer.invoke(channels.getPageCount, locationId);
   },
   getRecordPage: async (
     page: number,
-    pageSize: number,
+    siteId: string,
   ): Promise<SiteOccupancyRecordPage> => {
-    return ipcRenderer.invoke(channels.getRecordPage, page, pageSize);
+    return ipcRenderer.invoke(channels.getRecordPage, page, siteId);
   },
 };
 

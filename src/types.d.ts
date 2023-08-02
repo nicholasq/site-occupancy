@@ -1,11 +1,9 @@
 export interface SiteOccupancyApi {
-  getRecordCount(): Promise<number>;
-  getPageCount(): Promise<number>;
+  getRecordCount(locationId: string): Promise<number>;
 
-  getRecordPage(
-    page: number,
-    pageSize: number,
-  ): Promise<SiteOccupancyRecordPage>;
+  getPageCount(locationId: string): Promise<number>;
+
+  getRecordPage(page: number, siteId: string): Promise<SiteOccupancyRecordPage>;
 
   getLocations(): Promise<LocationDetails[]>;
 }
@@ -26,6 +24,11 @@ export interface LocationDetails {
   siteType?: string | null;
   latitude?: number | null;
   longitude?: number | null;
+}
+
+export interface MenuItem {
+  label: string;
+  value: string;
 }
 
 declare global {

@@ -1,29 +1,29 @@
 import {
   LocationDetails,
-  SiteOccupancyRecordPage,
   SiteOccupancyApi,
+  SiteOccupancyRecordPage,
 } from "../types";
 import {
-  locationItems,
-  getSiteOccupancyRecordPage,
+  getLocations,
   getPageCount,
   getRecordCount,
+  getSiteOccupancyRecordPage,
 } from "./fakedata";
 
 export const FakeApi: SiteOccupancyApi = {
   getLocations(): Promise<LocationDetails[]> {
-    return Promise.resolve(locationItems);
+    return Promise.resolve(getLocations());
   },
-  getRecordCount(): Promise<number> {
-    return Promise.resolve(getRecordCount());
+  getRecordCount(locationId: string): Promise<number> {
+    return Promise.resolve(getRecordCount(locationId));
   },
   getRecordPage(
     page: number,
-    pageSize: number,
+    siteId: string,
   ): Promise<SiteOccupancyRecordPage> {
-    return Promise.resolve(getSiteOccupancyRecordPage(page, pageSize));
+    return Promise.resolve(getSiteOccupancyRecordPage(page, siteId));
   },
-  getPageCount(): Promise<number> {
-    return Promise.resolve(getPageCount());
+  getPageCount(locationId: string): Promise<number> {
+    return Promise.resolve(getPageCount(locationId));
   },
 };
