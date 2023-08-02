@@ -112,7 +112,7 @@ export function getSiteOccupancyRecordPage(
   const startIndex = page * pageSize;
   const endIndex = startIndex + pageSize;
   const startDate = data[startIndex].date;
-  const endDate = data[endIndex].date;
+  const endDate = endIndex < data.length ? data[endIndex].date : startDate;
   const dateRangeLabel = `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`;
   const labels = data
     .slice(startIndex, endIndex)

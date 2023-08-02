@@ -71,7 +71,7 @@ export function ChartContextProvider({
     if (pageNumber === 0 && op === -1) {
       return;
     }
-    if (pageNumber === pageSize - 1 && op === 1) {
+    if (pageNumber === pageCount - 1 && op === 1) {
       return;
     }
     (async () => {
