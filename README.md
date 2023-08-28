@@ -4,3 +4,5 @@
 
 #### How to use
 This is a work in progress. The frontend is being driven by mock data.
+
+![Screenshot](./images/screenshot1.png)
