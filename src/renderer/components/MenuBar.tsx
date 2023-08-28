@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import HoverDropdown from "./HoverDropdown";
 import type { MenuItem } from "../../types";
 import { ChartContext } from "../context/ChartContext";
+import Modal from "./Modal";
 
 const MainDiv = styled.div`
   display: flex;
@@ -73,15 +74,24 @@ export default function MenuBar() {
       ? locationName?.substring(0, 50) + "..."
       : locationName;
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOpen = () => setIsModalOpen(true);
+  const handleClose = () => setIsModalOpen(false);
+
   return (
     <MainDiv>
+      {isModalOpen && (
+        <Modal onClose={handleClose}>
+          <h2>Settings</h2>
+        </Modal>
+      )}
       <LeftDiv>
         <StatusContainer>{shortLocationName}</StatusContainer>
       </LeftDiv>
       <RightDiv>
         <HoverDropdown items={locationItems} onSelect={setLocationId} />
         <MenuItem onClick={toggleSync}>Sync</MenuItem>
-        <MenuItem>Settings</MenuItem>
+        <MenuItem onClick={handleOpen}>Settings</MenuItem>
       </RightDiv>
       <StatusContainer>
         {syncing && (
